@@ -15,7 +15,7 @@ public class Main {
         Scanner teclado = new Scanner(System.in);
         int opcion_seleccionada;
         int salir = 1;
-        var direccion_general = "https://v6.exchangerate-api.com/v6/93936407eb469bbf1639dffb/latest/";
+        var direccion_general = "url";
         String moneda_base="";
         String moneda_conversion="";
         Double valor_convertir;
@@ -34,10 +34,8 @@ public class Main {
             System.out.println("7) SALIR");
             System.out.println("**********************************************");
             System.out.println("SELECCIONA UNA OPCIÓN DE CONVERSIÓN DEL MENÚ");
-
             opcion_seleccionada = teclado.nextInt();
-            System.out.println("INGRESE EL VALOR A CONVERTIR");
-            valor_convertir = teclado.nextDouble();
+
 
             switch (opcion_seleccionada){
                 //MXN
@@ -86,6 +84,12 @@ public class Main {
 
             }
 
+            if(salir==0){
+                break;
+            }
+            System.out.println("INGRESE EL VALOR A CONVERTIR");
+            valor_convertir = teclado.nextDouble();
+
             //CONSULTA A LA API DE EXCHANGE
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create(direccion_general+moneda_base)).build();
@@ -100,6 +104,9 @@ public class Main {
             double resultado = valor_convertir * valor_moneda_conversion;
             System.out.println(moneda_base+" base: "+valor_moneda_base+", "+moneda_conversion+" conversion: "+valor_moneda_conversion);
             System.out.println("Operación: "+valor_convertir+" "+moneda_base+" a "+moneda_conversion+" equivale a "+resultado+" "+moneda_conversion);
+
+
+
         }
 
 
